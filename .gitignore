@@ -1,1 +1,4 @@
 global.env
+external-services/external-services.env
+mgmt-services/mgmt-services.env
+vpn-services/vpn-services.env
