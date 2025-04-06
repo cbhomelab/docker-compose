@@ -362,8 +362,8 @@ services:
         options:
             max-size: 50m
   ytdl-sub:
-    image: ghcr.io/jmbannon/ytdl-sub-gui:latest
-    container_name: tubesync
+    image: ghcr.io/jmbannon/ytdl-sub:latest
+    container_name: ytdl-sub
     restart: unless-stopped
     networks:
       priv_bridge:
