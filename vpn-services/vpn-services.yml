@@ -18,6 +18,34 @@ networks:
     name: docker
     external: true
 services:
+  nextpvr:
+    image: nextpvr/nextpvr_amd64:stable
+    container_name: nextpvr
+    networks:
+      priv_bridge:
+        ipv4_address: ${nextpvrip}
+      docker:
+    environment:
+      - PUID=${dockeruid}
+      - PGID=${dockergid}
+      - TZ=${timezone}
+    volumes:
+      - ${appdata}/nextpvr:/config:rw
+      - ${media}/tv:/tv:rw #optional
+      - ${media}/dvr:/recordings:rw #optional
+      - ${media}/dvr:/buffer:rw #optional
+      - ${intel}:rw
+    restart: unless-stopped
+    deploy:
+      resources:
+          limits:
+              pids: 2048
+              memory: 8G
+    logging:
+        options:
+            max-size: 50m
+    devices:
+      - ${intel}
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
