@@ -374,6 +374,8 @@ services:
       - ${media}/youtube:/youtube:rw
       - ${intel}:rw
     environment:
+      - CRON_SCHEDULE="0 */6 * * *"
+      - CRON_RUN_ON_START=false
       - PUID=${dockeruid}
       - PGID=${dockergid}
       - TZ=${timezone}
