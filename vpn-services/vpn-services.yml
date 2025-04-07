@@ -99,9 +99,9 @@ services:
         ipv4_address: ${lidarrip}
       docker:
     volumes:
-      - ${appdata}/lidarr/config:/config:rw
-      - ${appdata}/lidarr/custom-cont-init.d:/custom-cont-init.d:rw
-      - ${appdata}/lidarr/custom-services.d:/custom-services.d:rw
+      - ${appdata}/lidarr:/config:rw
+      - ${scripts}/lidarr-extended/custom-cont-init.d:/custom-cont-init.d:rw
+      - ${scripts}/lidarr-extended/custom-services.d:/custom-services.d:rw
       - ${media}/music:/music:rw #optional
       - ${media}/downloads:/downloads:rw #optional
       - ${media}/seeds:/seeds:rw #optional
@@ -356,7 +356,7 @@ services:
       - ${appdata}/qbittorrent:/config:rw
       - ${downloads}:/downloads:rw #optional
       - ${media}/seeds:/seeds:rw #optional
-      - ${media}/scripts/nzbtomedia:/scripts:rw
+      - ${scripts}/nzbtomedia:/scripts:rw
     restart: unless-stopped
     deploy:
       resources:
