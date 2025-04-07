@@ -81,14 +81,17 @@ services:
       - "5000:5000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${appdata}/fileflows/data:/app/data:rw
-      - ${appdata}/fileflows/logs:/app/logs:rw
+      - ${appdata}/fileflows/data:/app/Data:rw
+      - ${appdata}/fileflows/logs:/app/Logs:rw
       - ${media}/tv:/tv:rw
       - ${media}/movies:/movies:rw
       - ${media}/youtube:/youtube:rw
       - ${media}/dvr:/dvr:rw
       - ${media}/audiobooks:/audiobooks:rw
+      - ${media}/deprecated:/deprecated:rw
       - ${media}/music:/music:rw
+      - ${downloads}/audiobook_processing:/audiobook_processing:rw
+      - /dev/shm:/temp:rw
       - ${intel}:rw
     deploy:
       resources:
