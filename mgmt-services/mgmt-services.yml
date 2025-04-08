@@ -47,33 +47,34 @@ services:
           max-size: 50m
     restart: unless-stopped
     image: ich777/krusader
-  auto-m4b:
-    image: seanap/auto-m4b
-    container_name: auto-m4b
-    network_mode: "host"
-    environment:
-      - PUID=${dockeruid}
-      - PGID=${dockergid}
-      - TZ=${timezone}
-    volumes:
-      - ${appdata}/auto-m4b:/config:rw
-      - ${downloads}/audiobook_processing:/temp:rw
-    deploy:
-        resources:
-            limits:
-                pids: 2048
-                memory: 1G
-    logging:
-        options:
-            max-size: 50m
+  # auto-m4b:
+  #   image: seanap/auto-m4b
+  #   container_name: auto-m4b
+  #   network_mode: "host"
+  #   environment:
+  #     - PUID=${dockeruid}
+  #     - PGID=${dockergid}
+  #     - TZ=${timezone}
+  #   volumes:
+  #     - ${appdata}/auto-m4b:/config:rw
+  #     - ${downloads}/audiobook_processing:/temp:rw
+  #   deploy:
+  #       resources:
+  #           limits:
+  #               pids: 2048
+  #               memory: 1G
+  #   logging:
+  #       options:
+  #           max-size: 50m
   fileflows:
-    image: revenz/fileflows
+    image: revenz/fileflows:latest
     container_name: fileflows
     restart: unless-stopped
     environment:
       - PUID=${dockeruid}
       - PGID=${dockergid}
       - TZ=${timezone}
+      - TempPathHost=${downloads}/fileflows
     networks:
       mgmt_bridge:
         ipv4_address: ${fileflowsip}
@@ -90,8 +91,7 @@ services:
       - ${media}/audiobooks:/audiobooks:rw
       - ${media}/deprecated:/deprecated:rw
       - ${media}/music:/music:rw
-      - ${downloads}/audiobook_processing:/audiobook_processing:rw
-      - /dev/shm:/temp:rw
+      - ${downloads}/fileflows:/temp:rw
       - ${intel}:rw
     deploy:
       resources:

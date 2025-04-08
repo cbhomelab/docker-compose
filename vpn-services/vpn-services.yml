@@ -31,16 +31,15 @@ services:
       - TZ=${timezone}
     volumes:
       - ${appdata}/nextpvr:/config:rw
-      - ${media}/tv:/tv:rw #optional
       - ${media}/dvr:/recordings:rw #optional
-      - ${media}/dvr:/buffer:rw #optional
+      - ${ram}/nextpvr:/buffer:rw #optional
       - ${intel}:rw
     restart: unless-stopped
     deploy:
       resources:
           limits:
               pids: 2048
-              memory: 8G
+              memory: 16G
     logging:
         options:
             max-size: 50m
