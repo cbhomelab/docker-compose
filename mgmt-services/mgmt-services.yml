@@ -78,6 +78,7 @@ services:
     networks:
       mgmt_bridge:
         ipv4_address: ${fileflowsip}
+      docker:
     ports:
       - "5000:5000"
     volumes:
@@ -104,30 +105,30 @@ services:
     devices:
       # - /dev/dri:/dev/dri
       - ${intel}
-  minio:
-    image: ghcr.io/imagegenius/minio:latest
-    container_name: minio
-    network_mode: "host"
-    environment:
-      - PUID=${dockeruid}
-      - PGID=${dockergid}
-      - TZ=${timezone}
-      - MINIO_ROOT_USER=minio
-      - MINIO_ROOT_PASSWORD=${minio-root-pass}
-    volumes:
-      - ${media}:/config:rw
-    ports:
-      - 9001:9001
-      - 9000:9000
-    restart: unless-stopped
-    deploy:
-      resources:
-          limits:
-              pids: 2048
-              memory: 4G
-    logging:
-        options:
-            max-size: 50m
+  # minio:
+  #   image: ghcr.io/imagegenius/minio:latest
+  #   container_name: minio
+  #   network_mode: "host"
+  #   environment:
+  #     - PUID=${dockeruid}
+  #     - PGID=${dockergid}
+  #     - TZ=${timezone}
+  #     - MINIO_ROOT_USER=minio
+  #     - MINIO_ROOT_PASSWORD=${minio-root-pass}
+  #   volumes:
+  #     - ${media}:/config:rw
+  #   ports:
+  #     - 9001:9001
+  #     - 9000:9000
+  #   restart: unless-stopped
+  #   deploy:
+  #     resources:
+  #         limits:
+  #             pids: 2048
+  #             memory: 4G
+  #   logging:
+  #       options:
+  #           max-size: 50m
   frigate:
     container_name: frigate
     privileged: true # this may not be necessary for all setups
