@@ -152,4 +152,9 @@ services:
         tmpfs:
           size: 1000000000
     environment:
-      FRIGATE_RTSP_PASSWORD: "${frigatertsppassword}"
+      FRIGATE_RTSP_USER: "${frigate_rtsp_user}"
+      FRIGATE_RTSP_PASSWORD: "${frigate_rtsp_password}"
+      FRIGATE_MQTT_USER: "${frigate_mqtt_user}"
+      FRIGATE_MQTT_PASSWORD: "${frigate_mqtt_password}"
+      FRIGATE_GO2RTC_RTSP_USERNAME: "${frigate_go2rtc_user}"
+      FRIGATE_GO2RTC_RTSP_PASSWORD: "${frigate_go2rtc_password}"
