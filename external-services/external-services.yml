@@ -32,7 +32,7 @@ services:
       - VERSION=docker
       - PLEX_CLAIM=${plexclaim} #optional
     volumes:
-      - ${ram}/plex:/transcode:rw
+      - /dev/shm:/transcode:rw
       - /etc/localtime:/etc/localtime:ro
       - ${plexcache}/plex:/config:rw
       - ${media}/tv:/mnt/media/TV:rw
@@ -70,7 +70,6 @@ services:
       - ${media}/tv:/tv:rw
       - ${media}/movies:/movies:rw
       - ${intel}:rw
-      - ${ram}/jellyfin:/transcode:rw
     deploy:
       resources:
           limits:
